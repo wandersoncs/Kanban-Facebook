@@ -15,6 +15,8 @@ angular.module('Kanban')
     $scope.logar = function () {
       if (!usuarioConectado) {
         login();
+      } else {
+        me();
       }
     };
 
