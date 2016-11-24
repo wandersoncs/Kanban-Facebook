@@ -1,1 +1,1 @@
-angular.module('Tarefas', ['facebook']);
+angular.module('Kanban', ['facebook']);
