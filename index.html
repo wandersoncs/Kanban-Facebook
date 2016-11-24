@@ -14,5 +14,13 @@
 
     <button type="button" ng-show="!logado" ng-click="logar()">Login with Facebook</button>
     <button type="button" ng-show="logado" ng-click="logout()">Logout</button>
+    <button type="button" ng-show="logado" ng-click="getGroups()">Carregar Grupos</button>
+    <h2>
+      {{usuario.name}}
+    </h2>
+    <h3>
+      {{grupos}}
+    </h3>
+
   </body>
 </html>
