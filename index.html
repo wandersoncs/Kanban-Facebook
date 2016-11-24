@@ -9,6 +9,8 @@
 
   </head>
   <body ng-controller="MainController">
-    
+
+    <button type="button" ng-show="!logado" ng-click="logar()">Login with Facebook</button>
+    <button type="button" ng-show="logado" ng-click="logout()">Logout</button>
   </body>
 </html>
