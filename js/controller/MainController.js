@@ -25,9 +25,9 @@ angular.module('Kanban')
       Facebook.login(function (response) {
         if (response.status == 'connected') {
           $scope.logado = true;
-          me(); //meu perfil
+          me();
         }
-      });
+      }, {scope: 'user_managed_groups'});
     };
 
     me = function () {
