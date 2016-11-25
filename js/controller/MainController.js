@@ -4,7 +4,8 @@ angular.module('Kanban')
 
     $scope.usuario = {};
     $scope.logado = false;
-    $scope.grupos = {};
+    $scope.grupos = [];
+    $scope.grupo = {}
 
     var usuarioConectado = false;
 
@@ -27,7 +28,7 @@ angular.module('Kanban')
           $scope.logado = true;
           me();
         }
-      }, {scope: 'user_managed_groups'});
+      }, {scope: 'user_managed_groups', 'publish_actions'});
     };
 
     me = function () {
@@ -51,8 +52,19 @@ angular.module('Kanban')
       Facebook.api('/me/groups', function (response) {
         $scope.$apply(function () {
           $scope.grupos = response;
+
+          $scope.grupo = {'id': $scope.grupos[0].id, 'name': $scope.grupos[0].name};
+
         });
       });
     };
+
+    $scope.publicar = function (messagem, grupo) {
+
+      var grupo = grupos[0].id;
+
+      var url = grupo.id;
+      Facebook.api(url, 'post', {message: messagem});
+    }
 
   });
