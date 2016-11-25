@@ -28,7 +28,7 @@ angular.module('Kanban')
           $scope.logado = true;
           me();
         }
-      }, {scope: 'user_managed_groups', 'publish_actions'});
+      }, {scope: 'user_managed_groups, publish_actions'});
     };
 
     me = function () {
