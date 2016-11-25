@@ -5,7 +5,7 @@ angular.module('Kanban')
     $scope.usuario = {};
     $scope.logado = false;
     $scope.grupos = [];
-    $scope.grupo = {}
+    $scope.grupo = {};
 
     var usuarioConectado = false;
 
