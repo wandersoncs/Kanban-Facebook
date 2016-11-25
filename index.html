@@ -5,23 +5,48 @@
     <title>Kanban</title>
     <script src="libs/angular/angular.min.js"></script>
     <script src="libs/facebook/angular-facebook.js"></script>
+
     <script src="js/app.js"></script>
     <script src="js/config/config.js"></script>
     <script src="js/controller/MainController.js"></script>
 
+    <link type="text/css" rel="stylesheet" href="css/style.css">
+
+    <link type="text/css" rel="stylesheet" href="libs/materialize/materialize.min.css">
+
   </head>
   <body ng-controller="MainController">
 
-    <button type="button" ng-show="!logado" ng-click="logar()">Login with Facebook</button>
-    <button type="button" ng-show="logado" ng-click="logout()">Logout</button>
-    <button type="button" ng-show="logado" ng-click="getGroups()">Carregar Grupos</button>
-    <h2>
-      {{usuario.name}}
-    </h2>
-    <h3>
-      Todos os grupos = {{grupos}} <br>
-      Grupo Selecionado = {{grupo}}
-    </h3>
+    <nav>
+      <div class="nav-wrapper light-green darken-3">
+        <ul class="right hide-on-med-and-down">
+          <a ng-show="!logado" ng-click="logar()">Login</a>
+          <a ng-show="logado" ng-click="logout()">Sair</a>
+        </ul>
+      </div>
+    </nav>
 
+    <div class="container">
+
+      <div class="row">
+
+        <div class="col m12">
+          <button type="button" class="btn" ng-show="!logado" ng-click="logar()">Login with Facebook</button>
+          <button type="button" class="btn" ng-show="logado" ng-click="logout()">Logout</button>
+          <button type="button" class="btn" ng-show="logado" ng-click="getGroups()">Carregar Grupos</button>
+        </div>
+
+      </div>
+
+      <div class="row">
+
+        <div class="col m12">
+          <h4>{{usuario.nome}}</h4>
+          <h5>{{grupos}}</h5>
+        </div>
+
+      </div>
+
+    </div>
   </body>
 </html>

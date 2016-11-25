@@ -52,9 +52,6 @@ angular.module('Kanban')
       Facebook.api('/me/groups', function (response) {
         $scope.$apply(function () {
           $scope.grupos = response;
-
-          $scope.grupo = {'id': $scope.grupos[0].id, 'name': $scope.grupos[0].name};
-
         });
       });
     };
