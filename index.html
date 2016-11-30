@@ -3,50 +3,61 @@
   <head>
     <meta charset="utf-8">
     <title>Kanban</title>
+
     <script src="libs/angular/angular.min.js"></script>
+    <script src="libs/angular/angular-route.min.js"></script>
     <script src="libs/facebook/angular-facebook.js"></script>
+    <script src="libs/materialize/angular-materialize.min.js"></script>
+
+    <script src="libs/jquery/jquery-3.0.0.min.js"></script>
+
+    <link type="text/css" rel="stylesheet" href="libs/materialize/materialize.min.css">
 
     <script src="js/app.js"></script>
     <script src="js/config/config.js"></script>
     <script src="js/controller/MainController.js"></script>
 
     <link type="text/css" rel="stylesheet" href="css/style.css">
-
-    <link type="text/css" rel="stylesheet" href="libs/materialize/materialize.min.css">
-
   </head>
+
   <body ng-controller="MainController">
 
-    <nav>
-      <div class="nav-wrapper light-green darken-3">
-        <ul class="right hide-on-med-and-down">
-          <a ng-show="!logado" ng-click="logar()">Login</a>
-          <a ng-show="logado" ng-click="logout()">Sair</a>
-        </ul>
-      </div>
+    <nav class="nav-wrapper nav">
+      <ul class="right hide-on-med-and-down">
+        <a ng-show="!logado" ng-click="logar()">Login</a>
+        <a ng-show="logado" ng-click="logout()">Sair</a>
+      </ul>
     </nav>
 
-    <div class="container">
+    <main>
 
       <div class="row">
-
-        <div class="col m12">
-          <button type="button" class="btn" ng-show="!logado" ng-click="logar()">Login with Facebook</button>
-          <button type="button" class="btn" ng-show="logado" ng-click="logout()">Logout</button>
-          <button type="button" class="btn" ng-show="logado" ng-click="getGroups()">Carregar Grupos</button>
-        </div>
-
-      </div>
-
-      <div class="row">
-
-        <div class="col m12">
+        <div class="col s12">
           <h4>{{usuario.nome}}</h4>
           <h5>{{grupos}}</h5>
         </div>
-
       </div>
 
-    </div>
+      <div class="row">
+        <div class="col s12 m4 to-do">
+          <h4>To do</h4>
+          <hr>
+
+        </div>
+
+        <div class="col s12 m4 doing">
+          <h4>Doing</h4>
+          <hr>
+
+        </div>
+
+        <div class="col s12 m4 done">
+          <h4>Done</h4>
+          <hr>
+
+        </div>
+      </div>
+
+    </main>
   </body>
 </html>

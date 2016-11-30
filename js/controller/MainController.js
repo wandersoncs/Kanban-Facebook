@@ -1,6 +1,6 @@
 angular.module('Kanban')
 
-  .controller('MainController', function ($scope, Facebook) {
+  .controller('MainController', function ($scope, Facebook, $timeout) {
 
     $scope.usuario = {};
     $scope.logado = false;
@@ -35,6 +35,7 @@ angular.module('Kanban')
       Facebook.api('/me', function (response) {
         $scope.$apply(function () {
           $scope.usuario = response;
+          getGroups();
         });
       });
     };
@@ -48,7 +49,7 @@ angular.module('Kanban')
       });
     };
 
-    $scope.getGroups = function () {
+    getGroups = function () {
       Facebook.api('/me/groups', function (response) {
         $scope.$apply(function () {
           $scope.grupos = response;
@@ -56,7 +57,11 @@ angular.module('Kanban')
       });
     };
 
-    $scope.publicar = function (messagem, grupo) {
+    $scope.selecionarGrupo = function () {
+      $scope.grupo = $scope.grupos.data[0];
+    }
+
+    $scope.publicar = function (messagem) {
 
       var grupo = grupos[0].id;
 

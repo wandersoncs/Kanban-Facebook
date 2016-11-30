@@ -1,1 +1,1 @@
-angular.module('Kanban', ['facebook']);
+angular.module('Kanban', ['facebook', 'ui.materialize', 'ngRoute']);

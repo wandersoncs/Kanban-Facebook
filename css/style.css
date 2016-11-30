@@ -1,0 +1,13 @@
+.nav {
+  padding: 0 5% 0;
+}
+
+main {
+  padding: 2% 5%;
+}
+
+.to-do, .doing, .done {
+  height: 20em;
+  border: 1px solid indigo;
+  border-radius: 2px;
+}
