@@ -67,5 +67,4 @@ angular.module('Kanban')
         console.log(response);
       });
     };
-
   });
