@@ -4,8 +4,9 @@ angular.module('Kanban')
 
     $scope.usuario = {};
     $scope.logado = false;
-    $scope.grupos = [];
+    $scope.grupos = {};
     $scope.grupo = {};
+    $scope.feed = {};
 
     var usuarioConectado = false;
 
@@ -67,4 +68,12 @@ angular.module('Kanban')
         console.log(response);
       });
     };
+
+    $scope.getFeedGrupo = function () {
+      var url = '/' + $scope.grupo.id + '/feed';
+
+      Facebook.api(url, function (response) {
+        $scope.feed = response;
+      });
+    }
   });
