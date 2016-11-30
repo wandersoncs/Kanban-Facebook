@@ -59,14 +59,11 @@ angular.module('Kanban')
 
     $scope.selecionarGrupo = function () {
       $scope.grupo = $scope.grupos.data[0];
-    }
+    };
 
-    $scope.publicar = function (messagem) {
-
-      var grupo = grupos[0].id;
-
-      var url = grupo.id;
-      Facebook.api(url, 'post', {message: messagem});
-    }
+    $scope.publicar = function (mensagem) {
+      var url = '/' + grupo.id + '/feed';
+      Facebook.api(url, 'POST', {message: messagem});
+    };
 
   });
