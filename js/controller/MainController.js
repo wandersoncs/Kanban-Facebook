@@ -62,7 +62,7 @@ angular.module('Kanban')
     };
 
     $scope.publicar = function () {
-      var url = '/' + grupo.id + '/feed';
+      var url = '/' + $scope.grupo.id + '/feed';
       Facebook.api(url, 'POST', {message: 'teste'}, function (response) {
         console.log(response);
       });
