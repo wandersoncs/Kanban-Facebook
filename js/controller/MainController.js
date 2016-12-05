@@ -74,22 +74,21 @@ angular.module('Kanban')
       });
     };
 
-    getFeedGrupo = function () {
+    $scope.getFeedGrupo = function () {
       var url = '/' + $scope.grupo.id + '/feed';
       Facebook.api(url, function (response) {
         feed = response;
+        getTarefas();
       });
     }
 
-    $scope.getTarefas = function () {
-
-      getFeedGrupo();
+    getTarefas = function () {
 
       var tarefas = {};
       var todo = {};
       var doing = {};
       var done = {};
-
+    
       tarefas = feed.data;
       tarefas = tarefas.filter(function (elem) {
         if ('message' in elem) {
