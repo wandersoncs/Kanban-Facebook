@@ -7,60 +7,24 @@
     <script src="libs/angular/angular.min.js"></script>
     <script src="libs/facebook/angular-facebook.js"></script>
 
-    <link type="text/css" rel="stylesheet" href="libs/materialize/materialize.min.css">
-
     <script src="js/app.js"></script>
     <script src="js/config/config.js"></script>
     <script src="js/controller/MainController.js"></script>
-
-    <link type="text/css" rel="stylesheet" href="css/style.css">
   </head>
 
   <body ng-controller="MainController">
 
-    <nav class="nav-wrapper nav">
-      <ul class="right hide-on-med-and-down">
-        <a ng-show="!logado" ng-click="logar()">Login</a>
-        <a ng-show="logado" ng-click="logout()">Sair</a>
-      </ul>
-    </nav>
+    <div>
+      <h4>{{usuario.nome}}</h4>
+      <h5>{{grupos}}</h5>
+      <h5>{{grupo.name}}</h5>
+      <h5>{{feed}}</h5>
 
-    <main>
+      <button type="button" ng-click="selecionarGrupo()">selecionarGrupo</button>
+      <input type="text" ng-model="mensagem">
+      <button type="button" ng-click="publicar(mensagem)">Publicar</button>
+      <button type="button" ng-click="getFeedGrupo()">Feed</button>
+    </div>
 
-      <div class="row">
-        <div class="col s12">
-          <h4>{{usuario.nome}}</h4>
-          <h5>{{grupos}}</h5>
-          <h5>{{grupo.name}}</h5>
-          <h5>{{feed}}</h5>
-
-          <button type="button" class="btn" ng-click="selecionarGrupo()">selecionarGrupo</button>
-          <input type="text" ng-model="mensagem" class="input" value="mensagem">
-          <button type="button" class="btn" ng-click="publicar(mensagem)">Publicar</button>
-          <button type="button" class="btn indigo" ng-click="getFeedGrupo()">Feed</button>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col s12 m4 to-do">
-          <h4>To do</h4>
-          <hr>
-
-        </div>
-
-        <div class="col s12 m4 doing">
-          <h4>Doing</h4>
-          <hr>
-
-        </div>
-
-        <div class="col s12 m4 done">
-          <h4>Done</h4>
-          <hr>
-
-        </div>
-      </div>
-
-    </main>
   </body>
 </html>
