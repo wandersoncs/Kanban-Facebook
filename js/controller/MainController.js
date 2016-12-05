@@ -2,12 +2,17 @@ angular.module('Kanban')
 
   .controller('MainController', function ($scope, Facebook, $timeout) {
 
-    $scope.usuario = {};
     $scope.logado = false;
+    $scope.usuario = {};
+
     $scope.grupos = {};
     $scope.grupo = {};
-    $scope.feed = {};
 
+    $scope.todo = {};
+    $scope.doing = {};
+    $scope.done = {};
+
+    var feed = {};
     var usuarioConectado = false;
 
     Facebook.getLoginStatus(function (response) {
@@ -65,14 +70,52 @@ angular.module('Kanban')
     $scope.publicar = function (mensagem) {
       var url = '/' + $scope.grupo.id + '/feed';
       Facebook.api(url, 'POST', {message: mensagem}, function (response) {
-        
+
       });
     };
 
-    $scope.getFeedGrupo = function () {
+    getFeedGrupo = function () {
       var url = '/' + $scope.grupo.id + '/feed';
       Facebook.api(url, function (response) {
-        $scope.feed = response;
+        feed = response;
       });
+    }
+
+    $scope.getTarefas = function () {
+      var tarefas = {};
+      var todo = {};
+      var doing = {};
+      var done = {};
+
+      tarefas = feed.data.filter(function (elem) {
+        if ('message' in elem) {
+          return elem;
+        }
+      });
+
+      todo = tarefas.filter(function (elem) {
+        var mensagem = elem.message;
+        if (mensagem.indexOf('#todo') !== -1) {
+          return elem;
+        }
+      });
+
+      doing = tarefas.filter(function (elem) {
+        var mensagem = elem.message;
+        if (mensagem.indexOf('#doing') !== -1) {
+          return elem;
+        }
+      });
+
+      done = tarefas.filter(function (elem) {
+        var mensagem = elem.message;
+        if (mensagem.indexOf('#done') !== -1) {
+          return elem;
+        }
+      });
+
+      $scope.todo = todo;
+      $scope.doing = doing;
+      $scope.done = done;
     }
   });
