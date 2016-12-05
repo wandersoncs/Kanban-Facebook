@@ -82,12 +82,16 @@ angular.module('Kanban')
     }
 
     $scope.getTarefas = function () {
+
+      getFeedGrupo();
+
       var tarefas = {};
       var todo = {};
       var doing = {};
       var done = {};
 
-      tarefas = feed.data.filter(function (elem) {
+      tarefas = feed.data;
+      tarefas = tarefas.filter(function (elem) {
         if ('message' in elem) {
           return elem;
         }
