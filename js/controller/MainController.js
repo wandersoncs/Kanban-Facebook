@@ -65,13 +65,12 @@ angular.module('Kanban')
     $scope.publicar = function (mensagem) {
       var url = '/' + $scope.grupo.id + '/feed';
       Facebook.api(url, 'POST', {message: mensagem}, function (response) {
-        console.log(response);
+        
       });
     };
 
     $scope.getFeedGrupo = function () {
       var url = '/' + $scope.grupo.id + '/feed';
-
       Facebook.api(url, function (response) {
         $scope.feed = response;
       });
