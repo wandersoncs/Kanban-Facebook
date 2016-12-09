@@ -67,10 +67,10 @@ angular.module('Kanban')
       $scope.grupo = $scope.grupos.data[0];
     };
 
-    $scope.publicar = function (mensagem) {
+    publicar = function (mensagem) {
       var url = '/' + $scope.grupo.id + '/feed';
       Facebook.api(url, 'POST', {message: mensagem}, function (response) {
-
+        getFeedGrupo();
       });
     };
 
@@ -88,7 +88,7 @@ angular.module('Kanban')
       var todo = {};
       var doing = {};
       var done = {};
-    
+
       tarefas = feed.data;
       tarefas = tarefas.filter(function (elem) {
         if ('message' in elem) {
@@ -117,8 +117,12 @@ angular.module('Kanban')
         }
       });
 
-      $scope.todo = todo;
+      $scope.todo = todo.;
       $scope.doing = doing;
       $scope.done = done;
+    }
+
+    setTarefa = function () {
+
     }
   });
