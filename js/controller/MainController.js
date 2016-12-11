@@ -3,7 +3,7 @@ angular.module('Kanban')
   .controller('MainController', function ($scope, Facebook, $timeout) {
 
     $scope.logado = false;
-    usuario = {};
+    $scope.usuario = {};
     $scope.grupo = {};
 
     $scope.todo = {};
@@ -27,15 +27,6 @@ angular.module('Kanban')
       }, {scope: 'user_managed_groups, publish_actions'});
     };
 
-    carregarPerfil = function () {
-      Facebook.api('/me', function (response) {
-        $scope.$apply(function () {
-          $scope.usuario = response;
-          getGroups();
-        });
-      });
-    };
-
     $scope.logout = function () {
       Facebook.logout(function () {
         $scope.$apply(function () {
@@ -45,10 +36,19 @@ angular.module('Kanban')
       });
     };
 
-    getGroups = function () {
+    var carregarPerfil = function () {
+      Facebook.api('/me', function (response) {
+        $scope.$apply(function () {
+          $scope.usuario = response;
+          getGroups();
+        });
+      });
+    };
+
+    var getGroups = function () {
       Facebook.api('/me/groups', function (response) {
         $scope.$apply(function () {
-          usuario.grupos = response;
+          $scope.usuario.grupos = response;
         });
       });
     };
@@ -63,20 +63,36 @@ angular.module('Kanban')
 
     $scope.selecionarGrupo = function (id) {
       if (usuario.hasOwnProperty('grupos'))
-        for (var grupo in usuario.grupos)
+        for (var grupo in $scope.usuario.grupos)
           if (grupo.id === id)
             $scope.grupo = grupo;
     };
 
-    $scope.publicar = function (mensagem) {
+    $scope.criarTarefa = function (mensagem, tipo) {
       var url = '/' + $scope.grupo.id + '/feed';
+      mensagem = mensagem + ' ' + tipo;
       Facebook.api(url, 'POST', {message: mensagem}, function (response) {
         getFeedGrupo();
       });
     };
 
-    $scope.alterarTarefa = function (tarefa) {
-      var url = ''
+    $scope.alterarTarefa = function (tarefa, tipo) {
+      var url = '/' + tarefa.id;
+      var mensagem = tarefa.message + ' ' + tipo;
+      Facebook.api(url, 'POST', {message: mensagem}, function (response) {
+        if (response && !response.error) {
+          getFeedGrupo();
+        }
+      });
+    };
+
+    $scope.deletarTarefa = function (tarefa) {
+      var url = '/' + tarefa.id;
+      Facebook.api(url, 'DELETE', function (response) {
+        if (response && !response.error) {
+          getFeedGrupo();
+        }
+      });
     };
 
     $scope.getFeedGrupo = function () {
@@ -132,9 +148,5 @@ angular.module('Kanban')
       $scope.doing = doing;
       $scope.done = done;
     }
-
-    setTarefa = function () {
-
-    };
 
   });
