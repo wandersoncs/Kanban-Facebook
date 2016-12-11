@@ -3,9 +3,7 @@ angular.module('Kanban')
   .controller('MainController', function ($scope, Facebook, $timeout) {
 
     $scope.logado = false;
-    $scope.usuario = {};
-
-    $scope.grupos = {};
+    usuario = {};
     $scope.grupo = {};
 
     $scope.todo = {};
@@ -15,29 +13,21 @@ angular.module('Kanban')
     var feed = {};
     var usuarioConectado = false;
 
-    Facebook.getLoginStatus(function (response) {
-      if (response.status == 'connected')
-        userIsConnected = true;
-    });
+    // Facebook.getLoginStatus(function (response) {
+    //   if (response.status == 'connected')
+    //     usuarioConectado = true;
+    // });
 
-    $scope.logar = function () {
-      if (!usuarioConectado) {
-        login();
-      } else {
-        me();
-      }
-    };
-
-    login = function () {
+    $sope.logar = function () {
       Facebook.login(function (response) {
         if (response.status == 'connected') {
           $scope.logado = true;
-          me();
+          carregarPerfil();
         }
       }, {scope: 'user_managed_groups, publish_actions'});
     };
 
-    me = function () {
+    carregarPerfil = function () {
       Facebook.api('/me', function (response) {
         $scope.$apply(function () {
           $scope.usuario = response;
@@ -58,20 +48,35 @@ angular.module('Kanban')
     getGroups = function () {
       Facebook.api('/me/groups', function (response) {
         $scope.$apply(function () {
-          $scope.grupos = response;
+          usuario.grupos = response;
         });
       });
     };
 
-    $scope.selecionarGrupo = function () {
-      $scope.grupo = $scope.grupos.data[0];
+    // getFriends = function () {
+    //   Facebook.api('/me/friends', function (response) {
+    //     $scope.$apply(function () {
+    //       usuario.friends = response;
+    //     });
+    //   });
+    // };
+
+    $scope.selecionarGrupo = function (id) {
+      if (usuario.hasOwnProperty('grupos'))
+        for (var grupo in usuario.grupos)
+          if (grupo.id === id)
+            $scope.grupo = grupo;
     };
 
-    publicar = function (mensagem) {
+    $scope.publicar = function (mensagem) {
       var url = '/' + $scope.grupo.id + '/feed';
       Facebook.api(url, 'POST', {message: mensagem}, function (response) {
         getFeedGrupo();
       });
+    };
+
+    $scope.alterarTarefa = function (tarefa) {
+      var url = ''
     };
 
     $scope.getFeedGrupo = function () {
@@ -82,7 +87,7 @@ angular.module('Kanban')
       });
     }
 
-    getTarefas = function () {
+    var getTarefas = function () {
 
       var tarefas = {};
       var todo = {};
@@ -99,6 +104,8 @@ angular.module('Kanban')
       todo = tarefas.filter(function (elem) {
         var mensagem = elem.message;
         if (mensagem.indexOf('#todo') !== -1) {
+          var msg = mensagem.replace('#todo', '');
+          elem.message = msg;
           return elem;
         }
       });
@@ -106,6 +113,8 @@ angular.module('Kanban')
       doing = tarefas.filter(function (elem) {
         var mensagem = elem.message;
         if (mensagem.indexOf('#doing') !== -1) {
+          var msg = mensagem.replace('#doing', '');
+          elem.message = msg;
           return elem;
         }
       });
@@ -113,6 +122,8 @@ angular.module('Kanban')
       done = tarefas.filter(function (elem) {
         var mensagem = elem.message;
         if (mensagem.indexOf('#done') !== -1) {
+          var msg = mensagem.replace('#done', '');
+          elem.message = msg;
           return elem;
         }
       });
@@ -124,5 +135,6 @@ angular.module('Kanban')
 
     setTarefa = function () {
 
-    }
+    };
+
   });
