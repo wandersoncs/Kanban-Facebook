@@ -49,7 +49,7 @@ angular.module('Kanban')
     };
 
     $scope.selecionarGrupo = function (id) {
-      if (usuario.hasOwnProperty('grupos'))
+      if ($scope.usuario.hasOwnProperty('grupos'))
         for (var grupo in $scope.usuario.grupos)
           if (grupo.id === id)
             $scope.grupo = grupo;
