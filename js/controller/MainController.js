@@ -13,11 +13,6 @@ angular.module('Kanban')
     var feed = {};
     var usuarioConectado = false;
 
-    // Facebook.getLoginStatus(function (response) {
-    //   if (response.status == 'connected')
-    //     usuarioConectado = true;
-    // });
-
     $scope.logar = function () {
       Facebook.login(function (response) {
         if (response.status == 'connected') {
@@ -52,14 +47,6 @@ angular.module('Kanban')
         });
       });
     };
-
-    // getFriends = function () {
-    //   Facebook.api('/me/friends', function (response) {
-    //     $scope.$apply(function () {
-    //       usuario.friends = response;
-    //     });
-    //   });
-    // };
 
     $scope.selecionarGrupo = function (id) {
       if (usuario.hasOwnProperty('grupos'))
