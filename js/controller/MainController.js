@@ -18,7 +18,7 @@ angular.module('Kanban')
     //     usuarioConectado = true;
     // });
 
-    $sope.logar = function () {
+    $scope.logar = function () {
       Facebook.login(function (response) {
         if (response.status == 'connected') {
           $scope.logado = true;
@@ -144,7 +144,7 @@ angular.module('Kanban')
         }
       });
 
-      $scope.todo = todo.;
+      $scope.todo = todo;
       $scope.doing = doing;
       $scope.done = done;
     }

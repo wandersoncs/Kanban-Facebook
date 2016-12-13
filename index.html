@@ -1,32 +1,80 @@
 <!DOCTYPE html>
 <html ng-app="Kanban">
-  <head>
-    <meta charset="utf-8">
-    <title>Kanban</title>
+<head>
+  <meta charset="utf-8">
+  <title>Kanban</title>
 
-    <script src="libs/angular/angular.min.js"></script>
-    <script src="libs/facebook/angular-facebook.js"></script>
+  <!-- libs js -->
+  <script src="libs/angular/angular.min.js"></script>
+  <script src="libs/facebook/angular-facebook.js"></script>
 
-    <script src="js/app.js"></script>
-    <script src="js/config/config.js"></script>
-    <script src="js/controller/MainController.js"></script>
-  </head>
+  <!-- libs css -->
+  <link rel="stylesheet" href="libs/materialize/materialize.min.css">
 
-  <body ng-controller="MainController">
+  <!-- files js -->
+  <script src="js/app.js"></script>
+  <script src="js/config/config.js"></script>
+  <script src="js/controller/MainController.js"></script>
 
-    <div>
-      <h4>{{usuario.nome}}</h4>
-      <h5>{{usuario.grupos}}</h5>
-      <h5>{{grupo.name}}</h5>
-      <h5>{{todo}}</h5>
-      <h5>{{doing}}</h5>
-      <h5>{{done}}</h5>
+  <!-- files css -->
+  <link type="text/css" rel="stylesheet" href="css/style.css">
 
-      <button type="button" ng-click="logar()">Login</button>
-      <button type="button" ng-click="selecionarGrupo()">selecionarGrupo</button>
-      <input type="text" ng-model="mensagem">
-      <button type="button" ng-click="publicar(mensagem)">Publicar</button>
-      <button type="button" ng-click="getFeedGrupo()">Feed</button>
+</head>
+
+<body ng-controller="MainController">
+
+  <nav>
+    <div class="nav-wrapper light-green darken-3">
+      <div class="container">
+        <ul class="right hide-on-med-and-down">
+          <li><img class="img-nav" src="img/login.png" alt="Login com Facebook" ng-click="logar()"></li>
+        </ul>
+      </div>
     </div>
-  </body>
+  </nav>
+
+  <div class="container">
+
+    <div class="row">
+
+      <div class="todo col s4">
+        <h3>TODO</h3>
+        <div class="card-panel tear" ng-repeat="card in todo">
+          <span class="white-text">{{card.message}}</span>
+        </div>
+      </div>
+
+      <div class="doing col s4">
+        <h3>DOING</h3>
+        <div class="card-panel indigo" ng-repeat="card in doing">
+          <span class="white-text">{{card.message}}</span>
+        </div>
+      </div>
+
+      <div class="done col s4">
+        <h3>DONE</h3>
+        <div class="card-panel pink" ng-repeat="card in done">
+          <span class="white-text">{{card.message}}</span>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div>
+    <h4>{{usuario.nome}}</h4>
+    <h5>{{usuario.grupos}}</h5>
+    <h5>{{grupo.name}}</h5>
+    <h5>{{todo}}</h5>
+    <h5>{{doing}}</h5>
+    <h5>{{done}}</h5>
+
+    <button type="button" ng-click="logar()">Login</button>
+    <button type="button" ng-click="selecionarGrupo()">selecionarGrupo</button>
+    <input type="text" ng-model="mensagem">
+    <button type="button" ng-click="publicar(mensagem)">Publicar</button>
+    <button type="button" ng-click="getFeedGrupo()">Feed</button>
+  </div>
+</body>
 </html>
