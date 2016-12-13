@@ -43,7 +43,7 @@ angular.module('Kanban')
     var getGroups = function () {
       Facebook.api('/me/groups', function (response) {
         $scope.$apply(function () {
-          $scope.usuario.grupos = response;
+          $scope.usuario.grupos = response.data;
         });
       });
     };
