@@ -6,9 +6,9 @@ angular.module('Kanban')
     $scope.usuario = {};
     $scope.grupo = {};
 
-    $scope.todo = {};
-    $scope.doing = {};
-    $scope.done = {};
+    $scope.todo = [];
+    $scope.doing = [];
+    $scope.done = [];
 
     var feed = {};
     var usuarioConectado = false;
@@ -49,10 +49,11 @@ angular.module('Kanban')
     };
 
     $scope.selecionarGrupo = function (id) {
-      if ($scope.usuario.hasOwnProperty('grupos'))
-        for (var grupo in $scope.usuario.grupos)
-          if (grupo.id === id)
-            $scope.grupo = grupo;
+      for (var grupo in $scope.usuario.grupos) {
+        if (grupo.id === id) {
+          $scope.grupo = grupo;
+        }
+      }
     };
 
     $scope.criarTarefa = function (mensagem, tipo) {

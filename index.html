@@ -39,23 +39,25 @@
     <div class="row">
 
       <div class="todo col s4">
-        <h3>TODO</h3>
-        <div class="card-panel tear" ng-repeat="card in todo">
-          <span class="white-text">{{card.message}}</span>
+        <h5>TODO</h5>
+        <div class="card-panel yellow" ng-repeat="card in todo">
+          <span class="black-text">{{card.message}}</span>
+          <a class="btn">fazer</a>
         </div>
       </div>
 
       <div class="doing col s4">
-        <h3>DOING</h3>
-        <div class="card-panel indigo" ng-repeat="card in doing">
-          <span class="white-text">{{card.message}}</span>
+        <h5>DOING</h5>
+        <div class="card-panel yellow" ng-repeat="card in doing">
+          <span class="black-text">{{card.message}}</span>
+          <a class="btn">finalizar</a>
         </div>
       </div>
 
       <div class="done col s4">
-        <h3>DONE</h3>
-        <div class="card-panel pink" ng-repeat="card in done">
-          <span class="white-text">{{card.message}}</span>
+        <h5>DONE</h5>
+        <div class="card-panel yellow" ng-repeat="card in done">
+          <span class="black-text">{{card.message}}</span>
         </div>
       </div>
 
