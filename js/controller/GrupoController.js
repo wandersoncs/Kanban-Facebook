@@ -32,7 +32,6 @@ app
     };
 
     $scope.selecionarGrupo = function (grupo) {
-      console.log(grupo);
       $rootScope.grupo = grupo;
       $timeout(function () {
         $state.go('home');

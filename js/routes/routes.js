@@ -23,6 +23,11 @@ app
         , templateUrl: 'views/home.html'
         , controller: 'MainController'
       })
+
+      .state('privacidade', {
+        url: '/privacidade'
+        , templateUrl: 'views/privacidade.html'
+      })
       ;
   })
 ;

@@ -2,6 +2,8 @@ app
 
   .controller('MainController', function ($rootScope, $scope, Facebook, $timeout, $state) {
 
+    $scope.grupo = $rootScope.grupo;
+
     $scope.todo = [];
     $scope.doing = [];
     $scope.done = [];
