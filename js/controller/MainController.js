@@ -1,8 +1,7 @@
-angular.module('Kanban')
+app
 
-  .controller('MainController', function ($scope, Facebook, $timeout) {
+  .controller('MainController', function ($rootScope, $scope, Facebook, $timeout) {
 
-    $scope.logado = false;
     $scope.usuario = {};
     $scope.grupo = {};
 
@@ -13,20 +12,24 @@ angular.module('Kanban')
     var feed = {};
     var usuarioConectado = false;
 
-    $scope.logar = function () {
-      Facebook.login(function (response) {
-        if (response.status == 'connected') {
-          $scope.logado = true;
-          carregarPerfil();
-        }
-      }, {scope: 'user_managed_groups, publish_actions'});
-    };
+    if ($rootScope.logado) {
+      carregarPerfil();
+    }
+
+    // $scope.logar = function () {
+    //   Facebook.login(function (response) {
+    //     if (response.status == 'connected') {
+    //       $rootScope.logado = true;
+    //       carregarPerfil();
+    //     }
+    //   }, {scope: 'user_managed_groups, publish_actions'});
+    // };
 
     $scope.logout = function () {
       Facebook.logout(function () {
         $scope.$apply(function () {
-          $scope.usuario  = {};
-          $scope.logado   = false;
+          $scope.usuario = {};
+          $rootScope.logado = false;
         });
       });
     };
@@ -49,92 +52,11 @@ angular.module('Kanban')
     };
 
     $scope.selecionarGrupo = function (id) {
-      for (var grupo in $scope.usuario.grupos) {
+      for (grupo in $scope.usuario.grupos) {
         if (grupo.id === id) {
           $scope.grupo = grupo;
         }
       }
     };
-
-    $scope.criarTarefa = function (mensagem, tipo) {
-      var url = '/' + $scope.grupo.id + '/feed';
-      mensagem = mensagem + ' ' + tipo;
-      Facebook.api(url, 'POST', {message: mensagem}, function (response) {
-        getFeedGrupo();
-      });
-    };
-
-    $scope.alterarTarefa = function (tarefa, tipo) {
-      var url = '/' + tarefa.id;
-      var mensagem = tarefa.message + ' ' + tipo;
-      Facebook.api(url, 'POST', {message: mensagem}, function (response) {
-        if (response && !response.error) {
-          getFeedGrupo();
-        }
-      });
-    };
-
-    $scope.deletarTarefa = function (tarefa) {
-      var url = '/' + tarefa.id;
-      Facebook.api(url, 'DELETE', function (response) {
-        if (response && !response.error) {
-          getFeedGrupo();
-        }
-      });
-    };
-
-    $scope.getFeedGrupo = function () {
-      var url = '/' + $scope.grupo.id + '/feed';
-      Facebook.api(url, function (response) {
-        feed = response;
-        getTarefas();
-      });
-    }
-
-    var getTarefas = function () {
-
-      var tarefas = {};
-      var todo = {};
-      var doing = {};
-      var done = {};
-
-      tarefas = feed.data;
-      tarefas = tarefas.filter(function (elem) {
-        if ('message' in elem) {
-          return elem;
-        }
-      });
-
-      todo = tarefas.filter(function (elem) {
-        var mensagem = elem.message;
-        if (mensagem.indexOf('#todo') !== -1) {
-          var msg = mensagem.replace('#todo', '');
-          elem.message = msg;
-          return elem;
-        }
-      });
-
-      doing = tarefas.filter(function (elem) {
-        var mensagem = elem.message;
-        if (mensagem.indexOf('#doing') !== -1) {
-          var msg = mensagem.replace('#doing', '');
-          elem.message = msg;
-          return elem;
-        }
-      });
-
-      done = tarefas.filter(function (elem) {
-        var mensagem = elem.message;
-        if (mensagem.indexOf('#done') !== -1) {
-          var msg = mensagem.replace('#done', '');
-          elem.message = msg;
-          return elem;
-        }
-      });
-
-      $scope.todo = todo;
-      $scope.doing = doing;
-      $scope.done = done;
-    }
-
-  });
+  })
+;

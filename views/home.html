@@ -1,0 +1,36 @@
+<nav>
+  <div class="nav-wrapper light-green darken-3">
+    <div class="container">
+      <ul class="right hide-on-med-and-down">
+        <li><a ng-click="logout()">Sair</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="row">
+    <div class="todo col s4">
+      <h5>TODO</h5>
+      <div class="card-panel yellow" ng-repeat="card in todo">
+        <span class="black-text">{{card.message}}</span>
+        <a class="btn">fazer</a>
+      </div>
+    </div>
+
+    <div class="doing col s4">
+      <h5>DOING</h5>
+      <div class="card-panel yellow" ng-repeat="card in doing">
+        <span class="black-text">{{card.message}}</span>
+        <a class="btn">finalizar</a>
+      </div>
+    </div>
+
+    <div class="done col s4">
+      <h5>DONE</h5>
+      <div class="card-panel yellow" ng-repeat="card in done">
+        <span class="black-text">{{card.message}}</span>
+      </div>
+    </div>
+  </div>
+</div>

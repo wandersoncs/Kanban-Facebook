@@ -1,1 +1,1 @@
-angular.module('Kanban', ['facebook']);
+var app = angular.module('Kanban', ['facebook']);
