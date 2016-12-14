@@ -2,13 +2,11 @@ app
 
   .controller('MainController', function ($rootScope, $scope, Facebook, $timeout, $state) {
 
-    // $scope.grupo = {};
     $scope.todo = [];
     $scope.doing = [];
     $scope.done = [];
 
     var feed = {};
-    // var usuarioConectado = false;
 
     $scope.logout = function () {
       Facebook.logout(function () {
