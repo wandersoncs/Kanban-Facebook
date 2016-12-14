@@ -28,11 +28,13 @@ app
     };
 
     $scope.novaTarefa = function (mensagem) {
-      var url = '/' + $scope.grupo.id + '/feed';
-      mensagem = mensagem + ' #todo';
-      Facebook.api(url, 'POST', {message: mensagem}, function (response) {
-        getFeedGrupo();
-      });
+      if (!mensagem === undefined) {
+        var url = '/' + $scope.grupo.id + '/feed';
+        mensagem = mensagem + ' #todo';
+        Facebook.api(url, 'POST', {message: mensagem}, function (response) {
+          getFeedGrupo();
+        });
+      }
     };
 
     alterarTarefa = function (tarefa, tipo) {
