@@ -47,7 +47,7 @@ app
       });
     };
 
-    deletarTarefa = function (tarefa) {
+    $scope.deletarTarefa = function (tarefa) {
       var url = '/' + tarefa.id;
       Facebook.api(url, 'DELETE', function (response) {
         if (response && !response.error) {
