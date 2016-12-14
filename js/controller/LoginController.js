@@ -1,6 +1,6 @@
 app
 
-  .controller('LoginController', function (Facebook, $rootScope, $state) {
+  .controller('LoginController', function (Facebook, $rootScope, $state, $scope) {
 
     $rootScope.logado = false;
 
@@ -8,10 +8,10 @@ app
       Facebook.login(function (response) {
         if (response.status == 'connected') {
           $rootScope.logado = true;
-          $state.go('groups');
+          $state.go('grupos');
         }
       }, {scope: 'user_managed_groups, publish_actions'});
     };
-    
+
   })
 ;
