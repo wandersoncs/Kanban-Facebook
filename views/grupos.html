@@ -9,5 +9,14 @@
 </nav>
 
 <div class="container">
-  
+  <div class="row">
+    <div class="col s8 offset-s2 ">
+      <ul class="collection with-header">
+        <li class="collection-header"><h5>Selecione um grupo</h5></li>
+        <li ng-repeat="grupo in grupos" class="collection-item">
+          <a href="#/grupos" ng-click="selecionarGrupo(grupo)">{{grupo.name}}</a>
+        </li>
+      </ul>
+    </div>
+  </div>
 </div>

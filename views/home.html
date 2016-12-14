@@ -10,27 +10,49 @@
 
 <div class="container">
   <div class="row">
+
     <div class="todo col s4">
       <h5>TODO</h5>
-      <div class="card-panel yellow" ng-repeat="card in todo">
-        <span class="black-text">{{card.message}}</span>
-        <a class="btn">fazer</a>
+      <div class="card blue-grey darken-1 hoverable" ng-repeat="card in todo">
+        <div class="card-content white-text">
+          {{card.message}}
+        </div>
+        <div class="card-action right-align">
+          <a href="#/home" ng-click="iniciarTarefa(card)">Iniciar</a>
+        </div>
       </div>
+
+      <div class="card blue-grey darken">
+        <div class="card-content">
+          <input type="text" ng-model="newCard">
+        </div>
+        <div class="card-action right-align">
+          <a href="#/home" ng-click="novaTarefa(newCard)">Iniciar</a>
+        </div>
+      </div>
+
     </div>
 
     <div class="doing col s4">
       <h5>DOING</h5>
-      <div class="card-panel yellow" ng-repeat="card in doing">
-        <span class="black-text">{{card.message}}</span>
-        <a class="btn">finalizar</a>
+      <div class="card blue-grey darken-1 hoverable" ng-repeat="card in doing">
+        <div class="card-content white-text">
+          {{card.message}}
+        </div>
+        <div class="card-action right-align">
+          <a href="#/home" ng-click="concluirTarefa(card)">Concluir</a>
+        </div>
       </div>
     </div>
 
     <div class="done col s4">
       <h5>DONE</h5>
-      <div class="card-panel yellow" ng-repeat="card in done">
-        <span class="black-text">{{card.message}}</span>
+      <div class="card blue-grey darken-1 hoverable" ng-repeat="card in done">
+        <div class="card-content white-text">
+          {{card.message}}
+        </div>
       </div>
     </div>
+
   </div>
 </div>

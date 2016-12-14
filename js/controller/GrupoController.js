@@ -2,11 +2,7 @@ app
 
   .controller('GrupoController', function ($state, Facebook, $rootScope, $scope) {
 
-    if (!$rootScope.logado) {
-      $state.go('login');
-    } else {
-      carregarPerfil();
-    }
+    $scope.grupos = [];
 
     $scope.logout = function () {
       Facebook.logout(function () {
@@ -35,12 +31,16 @@ app
       });
     };
 
-    $scope.selecionarGrupo = function (id) {
-      for (grupo in $scope.usuario.grupos) {
-        if (grupo.id === id) {
-          $scope.grupo = grupo;
-        }
-      }
+    $scope.selecionarGrupo = function (grupo) {
+      $rootScope.grupo = grupo;
+      $state.go('home');
     };
+
+    if (!$rootScope.logado) {
+      $state.go('login');
+    } else {
+      carregarPerfil();
+    }
+
   })
 ;

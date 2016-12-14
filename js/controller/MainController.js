@@ -1,21 +1,14 @@
 app
 
-  .controller('MainController', function ($rootScope, $scope, Facebook, $timeout) {
+  .controller('MainController', function ($rootScope, $scope, Facebook, $timeout, $state) {
 
-    if (!$rootScope.logado || !$rootScope.grupo) {
-      $state.go('login');
-    }
-    // else {
-    //   carregarPerfil();
-    // }
-
-    $scope.grupo = {};
+    // $scope.grupo = {};
     $scope.todo = [];
     $scope.doing = [];
     $scope.done = [];
 
     var feed = {};
-    var usuarioConectado = false;
+    // var usuarioConectado = false;
 
     $scope.logout = function () {
       Facebook.logout(function () {
@@ -36,7 +29,7 @@ app
       });
     };
 
-    $scope.criarTarefa = function (mensagem) {
+    $scope.novaTarefa = function (mensagem) {
       var url = '/' + $scope.grupo.id + '/feed';
       mensagem = mensagem + ' #todo';
       Facebook.api(url, 'POST', {message: mensagem}, function (response) {
@@ -44,7 +37,7 @@ app
       });
     };
 
-    $scope.alterarTarefa = function (tarefa, tipo) {
+    alterarTarefa = function (tarefa, tipo) {
       var url = '/' + tarefa.id;
       var mensagem = tarefa.message + ' ' + tipo;
       Facebook.api(url, 'POST', {message: mensagem}, function (response) {
@@ -54,7 +47,7 @@ app
       });
     };
 
-    $scope.deletarTarefa = function (tarefa) {
+    deletarTarefa = function (tarefa) {
       var url = '/' + tarefa.id;
       Facebook.api(url, 'DELETE', function (response) {
         if (response && !response.error) {
@@ -63,8 +56,8 @@ app
       });
     };
 
-    $scope.getFeedGrupo = function () {
-      var url = '/' + $scope.grupo.id + '/feed';
+    getFeedGrupo = function () {
+      var url = '/' + $rootScope.grupo.id + '/feed';
       Facebook.api(url, function (response) {
         feed = response;
         getTarefas();
@@ -116,6 +109,20 @@ app
       $scope.doing = doing;
       $scope.done = done;
     };
+
+    $scope.iniciarTarefa = function (tarefa) {
+      alterarTarefa(tarefa, '#doing');
+    };
+
+    $scope.concluirTarefa = function (tarefa) {
+      alterarTarefa(tarefa, '#done');
+    };
+
+    if (!$rootScope.logado) {
+      $state.go('login');
+    } else {
+      getFeedGrupo();
+    }
 
   })
 ;
