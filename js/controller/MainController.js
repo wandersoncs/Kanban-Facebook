@@ -28,7 +28,7 @@ app
     };
 
     $scope.novaTarefa = function (mensagem) {
-      if (!mensagem === undefined) {
+      if (mensagem != 'undefined') {
         var url = '/' + $scope.grupo.id + '/feed';
         mensagem = mensagem + ' #todo';
         Facebook.api(url, 'POST', {message: mensagem}, function (response) {
