@@ -1,6 +1,6 @@
 app
 
-  .controller('GrupoController', function ($state, Facebook, $rootScope, $scope) {
+  .controller('GrupoController', function ($state, Facebook, $rootScope, $scope, $timeout) {
 
     $scope.grupos = [];
 
@@ -32,8 +32,11 @@ app
     };
 
     $scope.selecionarGrupo = function (grupo) {
+      console.log(grupo);
       $rootScope.grupo = grupo;
-      $state.go('home');
+      $timeout(function () {
+        $state.go('home');
+      });
     };
 
     if (!$rootScope.logado) {
